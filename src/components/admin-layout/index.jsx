@@ -20,11 +20,6 @@ const DASHBOARD_MENUS = [
     label: "Add product",
     link: ROUTES.ADMIN_ADD_PRODUCT,
   },
-  {
-    icon: "system-uicons:box-add",
-    label: "Edit product",
-    link: ROUTES.ADMIN_EDIT_PRODUCT,
-  },
 ];
 
 const AdminLayout = ({ children }) => {

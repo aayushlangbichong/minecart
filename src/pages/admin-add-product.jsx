@@ -13,6 +13,7 @@ const defaultValues = {
   title: "",
   description: "",
   price: 0,
+  discountedPrice: 0,
 };
 const AdminAddProduct = () => {
   const [fields, setFields] = React.useState(defaultValues);
@@ -36,6 +37,7 @@ const AdminAddProduct = () => {
           description: fields.description,
           price: fields.price,
           category: [],
+          discountedPrice: fields.discountedPrice,
         },
         {
           headers: {
@@ -55,7 +57,6 @@ const AdminAddProduct = () => {
 
   return (
     <AdminLayout>
-      {JSON.stringify(fields)}
       <div>
         <form className="w-56 justify-center" onSubmit={handleAtProduct}>
           <Input
@@ -79,6 +80,14 @@ const AdminAddProduct = () => {
             value={fields.price}
             onChange={handleFieldChange}
             name="price"
+            min={0}
+          />
+          <Input
+            label={"Discounted Price"}
+            type={"number"}
+            value={fields.discountedPrice}
+            onChange={handleFieldChange}
+            name="discountedPrice"
             min={0}
           />
           {/* <Input label={"Category"} type={"text"} /> */}

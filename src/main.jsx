@@ -66,7 +66,7 @@ const router = createBrowserRouter([
     element: <AdminProducts />,
   },
   {
-    path: ROUTES.ADMIN_EDIT_PRODUCT,
+    path: `${ROUTES.ADMIN_PRODUCTS}/:product-id/edit`,
     element: <AdminEditProduct />,
   },
 ]);

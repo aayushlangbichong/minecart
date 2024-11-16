@@ -5,23 +5,24 @@ import { Link } from "react-router-dom";
 /**
  * @param variant = ["primary","secondary","tertiary","danger","success"]
  * **/
-const Button = ({
-  className,
-  variant = "primary",
-  children,
-  onClick,
-  disabled,
-}) => {
-  return (
-    <button
-      onClick={onClick}
-      disabled={disabled}
-      className={getButtonStyles({ className, variant })}
-    >
-      {children}
-    </button>
-  );
-};
+const Button = React.forwardRef(
+  (
+    { className, variant = "primary", children, onClick, disabled, ...props },
+    ref,
+  ) => {
+    return (
+      <button
+        ref={ref}
+        onClick={onClick}
+        disabled={disabled}
+        className={getButtonStyles({ className, variant })}
+        {...props}
+      >
+        {children}
+      </button>
+    );
+  },
+);
 
 const ButtonLink = ({ className, variant = "primary", children, to }) => {
   return (
