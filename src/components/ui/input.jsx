@@ -8,11 +8,14 @@ const Input = ({
   onChange,
   placeholder,
   error,
+  name,
+  ...props
 }) => {
   return (
     <div className="flex flex-col">
       <label className="">{label}</label>
       <input
+        name={name}
         type={type}
         onChange={onChange}
         value={value}
@@ -22,6 +25,7 @@ const Input = ({
 
           error ? "border-red-600" : "border-black",
         ])}
+        {...props}
       />
 
       {error && <div className="text-sm text-red-600">{error}</div>}

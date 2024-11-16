@@ -35,7 +35,7 @@ const ButtonLink = ({ className, variant = "primary", children, to }) => {
 const getButtonStyles = ({ variant = "primary", className }) => {
   return cn([
     // common properties
-    "rounded-md px-2 py-1 duration-200 active:scale-90 disabled:opacity-60",
+    "rounded-md px-2 py-1 duration-200 active:scale-90 disabled:opacity-60 inline-flex gap-1.5 items-center",
     variant === "primary" &&
       "bg-orange-500 text-white duration-200 hover:bg-orange-600",
 
