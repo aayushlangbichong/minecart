@@ -15,9 +15,10 @@ import Cart from "./pages/cart";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdminDashboard from "./pages/admin-dashboard";
-import AdminAddProduct from "./pages/admin-add-product";
 import AdminProducts from "./pages/admin-products";
-import AdminEditProduct from "./pages/admin-edit-product";
+import AdminProductCategories from "./pages/admin-product-categories";
+import AuthChecker from "@/components/modules/auth-checker";
+import CartSync from "./components/modules/cart-sync";
 
 const router = createBrowserRouter([
   {
@@ -54,10 +55,6 @@ const router = createBrowserRouter([
   },
 
   {
-    path: ROUTES.ADMIN_ADD_PRODUCT,
-    element: <AdminAddProduct />,
-  },
-  {
     path: ROUTES.ADMIN_DASHBOARD,
     element: <AdminDashboard />,
   },
@@ -65,14 +62,17 @@ const router = createBrowserRouter([
     path: ROUTES.ADMIN_PRODUCTS,
     element: <AdminProducts />,
   },
+
   {
-    path: `${ROUTES.ADMIN_PRODUCTS}/:product-id/edit`,
-    element: <AdminEditProduct />,
+    path: `${ROUTES.ADMIN_PRODUCT_CATEGORIES}`,
+    element: <AdminProductCategories />,
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <AuthChecker />
+    <CartSync />
     <ToastContainer autoClose={4000} />
     <RouterProvider router={router} />
   </React.StrictMode>,

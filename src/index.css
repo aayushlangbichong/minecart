@@ -2,8 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-
-.nav-active{
-    text-decoration: underline;
+.nav-active {
+  text-decoration: underline;
 }
 
+@layer base {
+  .show-list ul {
+    list-style: disc;
+    list-style-position: inside;
+  }
+
+  .show-list ol {
+    list-style: decimal;
+    list-style-position: inside;
+  }
+}

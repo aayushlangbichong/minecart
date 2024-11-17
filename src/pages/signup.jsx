@@ -10,8 +10,19 @@ import { setToken } from "../utils/tokens";
 import { toast } from "react-toastify";
 
 const Signup = () => {
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [fields, setFields] = React.useState({
+    email: "",
+    firstName: "",
+    lastName: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const handleInputChange = (e) => {
+    setFields((pre) => {
+      return { ...pre, [e.target.name]: e.target.value };
+    });
+  };
 
   const authStore = useAuthStore();
   const navigate = useNavigate();
@@ -19,15 +30,22 @@ const Signup = () => {
   async function handleSignup(e) {
     e.preventDefault();
 
+    if (fields.confirmPassword !== fields.password) {
+      toast.error("Passwords didn't match.");
+      return;
+    }
+
     try {
       const response = await api.post("/auth/signup", {
-        email: username,
-        password: password,
+        email: fields.email,
+        password: fields.password,
+        firstName: fields.firstName,
+        lastName: fields.lastName,
       });
 
       if (response) {
         setToken(response.data.token);
-        authStore.isLoggedIn(true);
+        authStore.setIsLoggedIn(true);
         authStore.setUser(response.data.user);
         navigate(ROUTES.HOME);
       }
@@ -43,10 +61,30 @@ const Signup = () => {
       <div className="mx-auto my-20 max-w-[300px]">
         <form className="flex flex-col gap-4" onSubmit={handleSignup}>
           <Input
-            label={"Username"}
-            placeholder={"Your Username"}
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            label={"First Name"}
+            type={"text"}
+            placeholder={""}
+            name="firstName"
+            onChange={handleInputChange}
+            value={fields.firstName}
+          />
+
+          <Input
+            label={"Last Name"}
+            type={"text"}
+            placeholder={""}
+            name="lastName"
+            onChange={handleInputChange}
+            value={fields.lastName}
+          />
+
+          <Input
+            label={"Email"}
+            placeholder={"Your Email"}
+            name="email"
+            onChange={handleInputChange}
+            value={fields.email}
+
             // error={"user name iunvalidS"}
           />
 
@@ -54,14 +92,16 @@ const Signup = () => {
             label={"Password"}
             type={"password"}
             placeholder={"Your password"}
-            s
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            onChange={handleInputChange}
+            value={fields.password}
           />
           <Input
             label={"Confirm Password"}
             type={"password"}
-            placeholder={"Your password"}
+            name="confirmPassword"
+            onChange={handleInputChange}
+            value={fields.confirmPassword}
           />
 
           <Button

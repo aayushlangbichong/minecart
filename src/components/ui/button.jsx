@@ -39,6 +39,8 @@ const getButtonStyles = ({ variant = "primary", className }) => {
     "rounded-md px-2 py-1 duration-200 active:scale-90 disabled:opacity-60 inline-flex gap-1.5 items-center",
     variant === "primary" &&
       "bg-orange-500 text-white duration-200 hover:bg-orange-600",
+    variant === "option" &&
+      "bg-gray-300 opacity-60 text-black duration-200 hover:opacity-100",
 
     variant === "secondary" &&
       "border-2 border-orange-600 text-orange-600 duration-200 hover:bg-orange-50",

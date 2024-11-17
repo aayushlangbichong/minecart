@@ -8,6 +8,7 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import useCountStore from "../../store/count-store";
 import useAuthStore from "../../store/auth-store";
 import { delToken } from "../../utils/tokens";
+import useCartStore from "@/store/cart-store";
 
 const NAV_LINK = [
   {
@@ -29,7 +30,7 @@ const NAV_LINK = [
 ];
 function Header() {
   const authStore = useAuthStore();
-
+  const { cart } = useCartStore();
   const logout = () => {
     delToken();
     authStore.setUser(null);
@@ -79,8 +80,8 @@ function Header() {
         )}
 
         <ButtonLink to={ROUTES.CART}>
-          {" "}
           <Icon className="size-6" icon={"mdi:cart"} />
+          <span>{cart?.items?.length || 0}</span>
         </ButtonLink>
       </div>
     </div>

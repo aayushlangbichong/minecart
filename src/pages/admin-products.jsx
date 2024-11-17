@@ -8,6 +8,8 @@ import { toast } from "react-toastify";
 import ROUTES from "../constants/routes";
 import { ButtonLink } from "../components/ui/button";
 import { ConfirmProductDelete } from "../components/modules/delete-product-dialog";
+import { AddProductSheet } from "@/components/modules/add-product.-sheet";
+import { EditProductSheet } from "@/components/modules/edit-product-sheet";
 
 const AdminProducts = () => {
   const [products, setProducts] = useState(null);
@@ -28,14 +30,8 @@ const AdminProducts = () => {
       <div className="min-h-screen grow bg-gray-100 p-6">
         <header className="mb-6 flex items-center justify-between">
           <h2 className="text-2xl font-semibold">Products Grid</h2>
-          <ButtonLink
-            className={
-              "rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-            }
-            to={ROUTES.ADMIN_ADD_PRODUCT}
-          >
-            Add product
-          </ButtonLink>
+
+          <AddProductSheet onAddSuccess={fetchProduct} />
         </header>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {products && products.length === 0 && (
@@ -46,6 +42,8 @@ const AdminProducts = () => {
 
           {products?.map((product) => {
             const hasDiscount = product.discountedPrice > 0;
+
+            const categories = product?.category?.map(({ name }) => name);
             return (
               <div
                 key={product._id}
@@ -67,16 +65,13 @@ const AdminProducts = () => {
                   </span>
                   {hasDiscount && <span>Rs.{product.discountedPrice}</span>}
                 </div>
-                <div className="flex justify-between">
-                  <ButtonLink
-                    className={
-                      "rounded bg-yellow-500 px-4 py-2 text-white hover:bg-yellow-600"
-                    }
-                    to={`${ROUTES.ADMIN_PRODUCTS}/${product._id}/edit`}
-                  >
-                    Edit
-                  </ButtonLink>
 
+                <div>categories: {categories?.join(",")}</div>
+                <div className="flex items-center justify-end gap-4">
+                  <EditProductSheet
+                    productId={product._id}
+                    onEditSuccess={fetchProduct}
+                  />
                   <ConfirmProductDelete
                     productId={product._id}
                     onDeleteSuccess={fetchProduct}
