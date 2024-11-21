@@ -3,7 +3,7 @@ import { ProductCategoriesSelect } from "../components/modules/product-categorie
 const AdminProductCategories = () => {
   return (
     <div>
-      CAtegories
+      Categories
       <ProductCategoriesSelect />
     </div>
   );

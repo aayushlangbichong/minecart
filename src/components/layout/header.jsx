@@ -27,6 +27,10 @@ const NAV_LINK = [
     link: ROUTES.SHOP,
     label: "Shop",
   },
+  {
+    link: ROUTES.MY_ORDERS,
+    label: "My orders",
+  },
 ];
 function Header() {
   const authStore = useAuthStore();
@@ -47,7 +51,7 @@ function Header() {
         <ul className="flex gap-8">
           {NAV_LINK.map((nav) => {
             return (
-              <li>
+              <li key={nav.link}>
                 <NavLink
                   to={nav.link}
                   className={({ isActive }) => {

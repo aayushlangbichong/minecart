@@ -18,8 +18,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Edit, Plus } from "lucide-react";
+import { Edit, Image, Plus, Trash } from "lucide-react";
 import Editor from "react-simple-wysiwyg";
+import ImageSelector from "./image-selector";
 
 export function EditProductSheet({ trigger, productId, onEditSuccess }) {
   const [open, setOpen] = React.useState(false);
@@ -75,6 +76,9 @@ const AdminEditProductForm = ({ onEditSuccess, productId }) => {
           price: res.data.price,
           discountedPrice: res.data?.discountedPrice || 0,
           category: res?.data?.category?.map(({ _id }) => _id) || [],
+          thumbnail: res?.data?.thumbnail?._id,
+          thumbnailUrl: res?.data?.thumbnail?.imgurUrl,
+          tags: res?.data?.tags?.join(",") || "",
         });
       }
     } catch (e) {
@@ -92,6 +96,8 @@ const AdminEditProductForm = ({ onEditSuccess, productId }) => {
         price: fields.price,
         discountedPrice: fields.discountedPrice,
         category: fields?.category || [],
+        thumbnail: fields?.thumbnail,
+        tags: fields?.tags?.split(",") || [],
       });
       if (res) {
         toast.success("Product Edited Successfully");
@@ -108,7 +114,7 @@ const AdminEditProductForm = ({ onEditSuccess, productId }) => {
   }, []);
   return (
     <form
-      className="mt-8 flex flex-col justify-center gap-6"
+      className="mt-8 flex grow flex-col gap-6 overflow-y-auto"
       onSubmit={handleProductEdit}
     >
       <Input
@@ -145,7 +151,17 @@ const AdminEditProductForm = ({ onEditSuccess, productId }) => {
         min={0}
       />
 
+      <Input
+        label={"Tags"}
+        description={"Separate tags by comma eg: pc-build, gaming-pack"}
+        type={"text"}
+        value={fields?.tags}
+        onChange={handleFieldChange}
+        name="tags"
+      />
+
       <ProductCategoriesSelect
+        label={"Categories"}
         values={fields?.category || []}
         onChange={(newValues) =>
           setFields((pre) => ({
@@ -154,6 +170,57 @@ const AdminEditProductForm = ({ onEditSuccess, productId }) => {
           }))
         }
       />
+
+      {/* thumbnail selector */}
+      <div>
+        <div className="mb-1">Thumbnail</div>
+
+        <div className="mb-2 flex gap-6">
+          {fields?.thumbnailUrl ? (
+            <img
+              src={fields?.thumbnailUrl}
+              className="aspect-square w-1/3 rounded-md"
+            />
+          ) : (
+            <div className="flex aspect-square w-1/3 items-center justify-center rounded-md bg-black/10">
+              <Image className="size-20 opacity-40" />
+            </div>
+          )}
+        </div>
+
+        <div className="flex gap-6">
+          <ImageSelector
+            trigger={
+              <Button variant="secondary">
+                {fields?.thumbnail ? "Change Thumbnail" : "Select Thumbnail"}
+              </Button>
+            }
+            selectedImagesIds={fields?.thumbnail ? [fields.thumbnail] : []}
+            onImageSelect={({ imageId, imageUrl }) =>
+              setFields((pre) => ({
+                ...pre,
+                thumbnail: imageId,
+                thumbnailUrl: imageUrl,
+              }))
+            }
+          />
+
+          {fields?.thumbnail && (
+            <Button
+              variant="danger"
+              onClick={() => {
+                setFields((pre) => ({
+                  ...pre,
+                  thumbnail: null,
+                  thumbnailUrl: null,
+                }));
+              }}
+            >
+              <Trash className="size-6" /> Remove
+            </Button>
+          )}
+        </div>
+      </div>
       {/* <Input label={"Category"} type={"text"} /> */}
       <Button className="mt-4 justify-center py-2" type="submit">
         Update product

@@ -24,6 +24,16 @@ const DASHBOARD_MENUS = [
     label: "Products",
     link: ROUTES.ADMIN_PRODUCTS,
   },
+  {
+    icon: "grommet-icons:gallery",
+    label: "Image Gallery",
+    link: ROUTES.ADMIN_IMAGE_GALLERY,
+  },
+  {
+    icon: "grommet-icons:gallery",
+    label: "Orders",
+    link: ROUTES.ADMIN_ORDERS,
+  },
 ];
 
 const AdminLayout = ({ children }) => {
@@ -41,7 +51,7 @@ const AdminLayout = ({ children }) => {
   };
   return (
     <div className="flex">
-      <div className="flex h-screen w-80 flex-col border-r bg-white py-6">
+      <div className="flex h-screen w-[250px] shrink-0 flex-col border-r bg-white py-6 4xl:w-80">
         <div className="flex items-center border-b p-4">
           <div className="text-2xl font-semibold text-blue-500">Admin</div>
         </div>
@@ -50,12 +60,12 @@ const AdminLayout = ({ children }) => {
             {/* popuate admin list menu */}
             {DASHBOARD_MENUS.map((menu) => {
               return (
-                <li>
+                <li key={menu.label}>
                   <NavLink
                     to={menu.link}
                     className="flex cursor-pointer items-center p-3 hover:bg-primary-50 [&.active]:bg-primary-600 [&.active]:text-white"
                   >
-                    <Icon icon={menu.icon} className="mr-3" />
+                    <Icon icon={menu.icon} className="mr-3 size-6" />
                     <span>{menu.label}</span>
                   </NavLink>
                 </li>

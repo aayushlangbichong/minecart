@@ -11,6 +11,7 @@ import Login from "./pages/login";
 import Signup from "./pages/signup";
 import ProductDetails from "./pages/product-details";
 import Cart from "./pages/cart";
+import PlaceOrder from "./pages/place-order";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -19,6 +20,9 @@ import AdminProducts from "./pages/admin-products";
 import AdminProductCategories from "./pages/admin-product-categories";
 import AuthChecker from "@/components/modules/auth-checker";
 import CartSync from "./components/modules/cart-sync";
+import AdminImageGallery from "./pages/admin-image-gallery";
+import MyOrders from "./pages/my-orders";
+import AdminOrders from "./pages/admin-orders";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +59,11 @@ const router = createBrowserRouter([
   },
 
   {
+    path: ROUTES.MY_ORDERS,
+    element: <MyOrders />,
+  },
+
+  {
     path: ROUTES.ADMIN_DASHBOARD,
     element: <AdminDashboard />,
   },
@@ -66,6 +75,18 @@ const router = createBrowserRouter([
   {
     path: `${ROUTES.ADMIN_PRODUCT_CATEGORIES}`,
     element: <AdminProductCategories />,
+  },
+  {
+    path: `${ROUTES.ADMIN_IMAGE_GALLERY}`,
+    element: <AdminImageGallery />,
+  },
+  {
+    path: ROUTES.PLACE_ORDER,
+    element: <PlaceOrder />,
+  },
+  {
+    path: ROUTES.ADMIN_ORDERS,
+    element: <AdminOrders />,
   },
 ]);
 

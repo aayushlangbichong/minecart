@@ -51,7 +51,7 @@ const Login = () => {
           <Input
             label={"Username"}
             placeholder={"Your Username"}
-            // error={"user name iunvalidS"}
+            // error={"user name invalidS"}
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
@@ -82,7 +82,6 @@ const Login = () => {
           .
         </p>
       </div>
-      <Counter></Counter>
     </Layout>
   );
 };

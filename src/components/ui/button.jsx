@@ -7,12 +7,21 @@ import { Link } from "react-router-dom";
  * **/
 const Button = React.forwardRef(
   (
-    { className, variant = "primary", children, onClick, disabled, ...props },
+    {
+      className,
+      variant = "primary",
+      children,
+      onClick,
+      disabled,
+      type = "button",
+      ...props
+    },
     ref,
   ) => {
     return (
       <button
         ref={ref}
+        type={type}
         onClick={onClick}
         disabled={disabled}
         className={getButtonStyles({ className, variant })}

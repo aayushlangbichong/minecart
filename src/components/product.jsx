@@ -4,6 +4,7 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import ROUTES from "../constants/routes";
 import useCartActions from "@/hooks/use-add-product-to-cart";
 import { formatCurrency } from "@/utils/format-currency";
+import { NO_IMAGE_URL } from "@/constants/placeholder";
 
 function Product({ product, onAddToCart }) {
   const hasDiscount = product?.discountedPrice > 0;
@@ -12,12 +13,13 @@ function Product({ product, onAddToCart }) {
 
   return (
     <div className="border-aayush-50 group overflow-hidden rounded-md border shadow-orange-600 hover:shadow-md">
-      <img
-        src={product.thumbnail || "/images/fallback-thumbnail.jpg"}
-        alt={product.name}
-        className="aspect-video object-cover duration-200 group-hover:scale-110"
-      />
-
+      <div className="relative aspect-video w-full overflow-hidden border">
+        <img
+          src={product.thumbnail?.imgurUrl || NO_IMAGE_URL}
+          alt={product.name}
+          className="absolute inset-0 block h-full w-full object-cover duration-200 group-hover:scale-110"
+        />
+      </div>
       <div className="p-4">
         <h2 className="font-bold">{product.title}</h2>
         <div className="flex gap-2">

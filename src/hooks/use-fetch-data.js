@@ -32,7 +32,7 @@ const useFetchData = (url, config) => {
 
   React.useEffect(() => {
     fetchData();
-  }, []);
+  }, [url]);
 
   const refetch = () => fetchData();
 

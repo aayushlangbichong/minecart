@@ -16,6 +16,11 @@ export default {
           400: "#5E565A",
         },
       },
+      screens: {
+        "3xl": "1800px",
+        "4xl": "2000px",
+        "5xl": "2400px",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

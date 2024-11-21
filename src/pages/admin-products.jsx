@@ -33,8 +33,8 @@ const AdminProducts = () => {
 
           <AddProductSheet onAddSuccess={fetchProduct} />
         </header>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {products && products.length === 0 && (
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 5xl:grid-cols-8">
+          {products && products?.length === 0 && (
             <div className="col-span-full my-20 text-center text-2xl font-bold">
               No products added
             </div>
@@ -50,9 +50,9 @@ const AdminProducts = () => {
                 className="rounded bg-white p-4 shadow hover:shadow-lg"
               >
                 <img
-                  src={product?.thumbnail || NO_IMAGE_URL}
+                  src={product?.thumbnail?.imgurUrl || NO_IMAGE_URL}
                   alt={product.name}
-                  className="mb-4 h-48 w-full rounded object-cover"
+                  className="mb-4 aspect-square w-full rounded object-cover"
                 />
                 <h4 className="mb-2 text-lg font-medium">{product.title}</h4>
                 <div className="mb-4 flex gap-2 text-gray-700">
@@ -66,8 +66,21 @@ const AdminProducts = () => {
                   {hasDiscount && <span>Rs.{product.discountedPrice}</span>}
                 </div>
 
-                <div>categories: {categories?.join(",")}</div>
-                <div className="flex items-center justify-end gap-4">
+                <div>Categories: {categories?.join(",")}</div>
+
+                <div>
+                  Tags:{" "}
+                  {categories?.map((tag, i) => (
+                    <span
+                      key={tag + i}
+                      className="inline-block rounded-3xl border border-black/40 bg-black/15 px-2 py-0.5"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="mt-6 flex items-center justify-end gap-4">
                   <EditProductSheet
                     productId={product._id}
                     onEditSuccess={fetchProduct}

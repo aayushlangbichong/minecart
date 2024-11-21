@@ -9,11 +9,15 @@ const Input = ({
   placeholder,
   error,
   name,
+  description,
   ...props
 }) => {
   return (
     <div className="flex flex-col">
       <label className="">{label}</label>
+      {description && (
+        <div className="mb-1 text-sm text-gray-500">{description}</div>
+      )}
       <input
         name={name}
         type={type}
