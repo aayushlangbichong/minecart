@@ -21,11 +21,11 @@ import { ChangeOrderStatus } from "@/components/modules/change-order-status";
 
 const TABLE_HEADERS = [
   "Order ID",
+  "Ordered by",
   "Items",
   "Total amount",
   "Status",
   "Shipping address",
-  "Actions",
 ];
 const AdminOrders = () => {
   const { data, refetch } = useFetchData("/orders", { useAuthApi: true });
@@ -43,9 +43,24 @@ const AdminOrders = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
+            {data.orders?.length === 0 && (
+              <TableRow>
+                <TableCell
+                  colSpan={TABLE_HEADERS.length}
+                  className="py-20 text-center opacity-50"
+                >
+                  No Orders Found
+                </TableCell>
+              </TableRow>
+            )}
+
             {data?.orders.map((order) => (
               <TableRow key={order._id}>
                 <TableCell className="font-medium">#{order._id}</TableCell>
+                <TableCell className="font-medium capitalize">
+                  {order.user?.firstName} {order.user?.lastName}
+                </TableCell>
+
                 <TableCell>
                   <ol className="list-disc capitalize">
                     {order.items.map((item) => (
@@ -74,9 +89,6 @@ const AdminOrders = () => {
                   <div>
                     {order.shippingAddress.city}, {order.shippingAddress.state}
                   </div>
-                </TableCell>
-                <TableCell>
-                  <AdminOrderActions />
                 </TableCell>
               </TableRow>
             ))}

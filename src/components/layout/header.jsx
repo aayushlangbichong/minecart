@@ -34,11 +34,12 @@ const NAV_LINK = [
 ];
 function Header() {
   const authStore = useAuthStore();
-  const { cart } = useCartStore();
+  const { cart, setCart } = useCartStore();
   const logout = () => {
     delToken();
     authStore.setUser(null);
     authStore.setIsLoggedIn(false);
+    setCart(null);
   };
 
   return (

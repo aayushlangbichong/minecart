@@ -29,7 +29,7 @@ const options = [
   "pending",
   "cancelled",
   "shipped",
-  "completed",
+  "delivered",
   "failed",
 ];
 export function ChangeOrderStatus({ order, onChangeSuccess }) {
@@ -43,6 +43,7 @@ export function ChangeOrderStatus({ order, onChangeSuccess }) {
       if (res) {
         toast.success("Order status updated successfully.");
         onChangeSuccess();
+        setShowDialog(false);
       }
     } catch (e) {
       toast.error(e?.response?.data?.message || "failed to update");

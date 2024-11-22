@@ -22,6 +22,14 @@ export default {
         "5xl": "2400px",
       },
     },
+    container: {
+      padding: {
+        sm: "16px",
+        md: "30px",
+        lg: "40px",
+      },
+      center: true,
+    },
   },
   plugins: [require("tailwindcss-animate")],
 };

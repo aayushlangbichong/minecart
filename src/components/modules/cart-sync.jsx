@@ -9,6 +9,7 @@ const CartSync = () => {
   const { refetch } = useFetchData("/cart", {
     useAuthApi: true,
     onSuccess: (data) => setCart(data),
+    disableErrorToast: true,
   });
 
   useCustomEvent(CART_INVALIDATE_EVENT_NAME, () => refetch());

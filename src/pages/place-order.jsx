@@ -4,6 +4,7 @@ import Input from "@/components/ui/input";
 import ROUTES from "@/constants/routes";
 import { useInvalidateCart } from "@/hooks/use-invalidate-cart";
 import { authApi } from "@/lib/api";
+import useAuthStore from "@/store/auth-store";
 import useCartStore from "@/store/cart-store";
 import { Loader } from "lucide-react";
 import React, { useState } from "react";
@@ -14,6 +15,7 @@ const PlaceOrder = () => {
   const [isSuccess, setIsSuccess] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
 
+  const { profile } = useAuthStore();
   const { cart, setCart } = useCartStore();
 
   // Move `fields` to a state variable
@@ -70,6 +72,17 @@ const PlaceOrder = () => {
       setIsLoading(false);
     }
   };
+
+  if (User.role === "admin") {
+    return (
+      <Layout>
+        <div className="container my-20 text-xl">
+          {" "}
+          Admin cannot place order. Please use another account.
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>

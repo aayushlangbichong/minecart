@@ -37,6 +37,16 @@ const MyOrders = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
+            {data?.orders?.length === 0 && (
+              <TableRow>
+                <TableCell
+                  colSpan={TABLE_HEADERS.length}
+                  className="py-20 text-center opacity-50"
+                >
+                  No Orders Found
+                </TableCell>
+              </TableRow>
+            )}
             {data?.orders.map((order) => (
               <TableRow key={order._id}>
                 <TableCell className="font-medium">#{order._id}</TableCell>

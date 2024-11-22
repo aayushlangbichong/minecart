@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { useInvalidateCart } from "./use-invalidate-cart";
 
 const useCartActions = () => {
-  const { isLoggedIn } = useAuthStore();
+  const { isLoggedIn, user } = useAuthStore();
   const { setOpen } = useLoginWallStore();
 
   const invalidateCart = useInvalidateCart();
@@ -16,6 +16,12 @@ const useCartActions = () => {
       setOpen(true);
       return;
     }
+
+    if (user.role === "admin") {
+      toast.error("Admin cannot use cart. Log in with another account.");
+      return;
+    }
+
     try {
       const res = await authApi.post("/cart/add", { quantity, productId });
       if (res) {
@@ -31,6 +37,10 @@ const useCartActions = () => {
   const removeProductsFromCart = async ({ itemIds }) => {
     if (!isLoggedIn) {
       setOpen(true);
+      return;
+    }
+    if (user.role === "admin") {
+      toast.error("Admin cannot use cart. Log in with another account.");
       return;
     }
     try {

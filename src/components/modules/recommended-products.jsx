@@ -13,7 +13,7 @@ const RecommendedProducts = ({ productId, tags }) => {
     <section>
       <h3 className="text-2xl font-bold">Recommended products</h3>
 
-      <div className="mt-10 grid grid-cols-4 gap-8">
+      <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
         {data?.products?.map((product) => (
           <Product key={product._id} product={product} />
         ))}

@@ -62,13 +62,13 @@ const Cart = () => {
                     <TableCell className="flex items-center gap-4 font-medium">
                       <img
                         src={item.product?.thumbnail?.imgurUrl || NO_IMAGE_URL}
-                        alt={item.product.title}
+                        alt={item.product?.title}
                         className="h-12 w-12 rounded object-cover"
                       />
-                      <span>{item.product.title}</span>
+                      <span>{item?.product?.title}</span>
                     </TableCell>
                     <TableCell>{formatCurrency(item.product.price)}</TableCell>
-                    <TableCell>{item.quantity}</TableCell>
+                    <TableCell>{item?.quantity}</TableCell>
                     <TableCell>
                       <ConfirmProductRemoveFromCart
                         trigger={
