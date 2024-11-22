@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import Layout from "@/components/layout";
 import ProductsShowCase from "@/components/modules/products-showcase";
+import PopularProductsShowCase from "@/components/modules/popular-products-showcase";
 
 const HomePage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -171,6 +172,7 @@ const HomePage = () => {
         </div>
 
         <div className="container mx-auto my-20 grid gap-10">
+          <PopularProductsShowCase />
           <ProductsShowCase category="gaming" heading="Latest Gaming Drops!!" />
           <ProductsShowCase category="groceries" heading="Fresh Groceries!!" />
           <ProductsShowCase

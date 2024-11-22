@@ -73,7 +73,7 @@ const PlaceOrder = () => {
     }
   };
 
-  if (User.role === "admin") {
+  if (profile?.role === "admin") {
     return (
       <Layout>
         <div className="container my-20 text-xl">
